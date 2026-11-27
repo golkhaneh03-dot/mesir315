@@ -1,0 +1,8 @@
+{
+  "appId": "ir.zendegiman.app",
+  "appName": "زندگی من",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}

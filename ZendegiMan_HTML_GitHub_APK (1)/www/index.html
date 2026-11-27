@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="زندگی من؛ دستیار شخصی برای برنامه‌ریزی و نظم روزانه">
+<title>زندگی من | دستیار شخصی</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{--bg:#0b1220;--panel:#141f30;--panel2:#1a2940;--line:#26364c;--mint:#55dfb1;--text:#f3f7fb;--muted:#98a9bd;--red:#ff7777;--gold:#f4c96b}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% -10%,#18334a 0,transparent 38%),var(--bg);color:var(--text);font-family:Tahoma,"Segoe UI",sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer}
+.wrap{max-width:920px;margin:auto;padding:24px 18px 100px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(145deg,#72f0c7,#1a9d7c);display:grid;place-items:center;color:#06251e;font-size:25px;font-weight:bold;box-shadow:0 8px 25px #2ac99a30}
+h1{font-size:24px;margin:0 0 5px} .sub{font-size:12px;color:var(--muted)}
+.date{font-size:12px;color:var(--muted);text-align:left;line-height:1.8}
+.hero{background:linear-gradient(120deg,#183348,#172538 65%,#172b36);border:1px solid #2b4657;border-radius:24px;padding:22px;margin-bottom:16px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:170px;height:170px;border:1px solid #ffffff12;border-radius:50%;left:-45px;top:-80px;box-shadow:0 0 0 22px #ffffff08,0 0 0 45px #ffffff05}
+.hero h2{margin:0 0 8px;font-size:20px}.hero p{color:#b9cbd6;margin:0;font-size:13px;line-height:1.9}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0 22px}
+.stat,.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px}
+.stat{padding:15px}.stat b{display:block;color:var(--mint);font-size:25px;margin-bottom:5px}.stat span{font-size:11px;color:var(--muted)}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:22px 2px 12px}
+.section-head h3{margin:0;font-size:17px}.hint{font-size:11px;color:var(--muted)}
+.add{border:0;border-radius:12px;padding:10px 15px;background:var(--mint);color:#06251e;font-weight:bold}
+.panel{padding:15px;margin-bottom:14px}
+.formgrid{display:grid;grid-template-columns:1fr 130px 110px auto;gap:8px}
+input,select{background:#0e1928;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0;outline:none}
+input:focus,select:focus{border-color:var(--mint)}
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
+.chip{border:1px solid var(--line);background:#101b2a;color:var(--muted);padding:8px 12px;border-radius:20px;font-size:11px}
+.chip.active{background:#173d37;border-color:#2c8e73;color:var(--mint)}
+.task{display:flex;align-items:center;gap:11px;padding:13px 2px;border-bottom:1px solid #26364c}
+.task:last-child{border-bottom:0}.check{width:22px;height:22px;accent-color:var(--mint);flex:none}
+.taskmain{flex:1;min-width:0}.tasktitle{font-size:14px;overflow-wrap:anywhere}.task.done .tasktitle{text-decoration:line-through;color:var(--muted)}
+.meta{font-size:10px;color:var(--muted);margin-top:6px}.priority{display:inline-block;margin-right:6px}.high{color:var(--red)}.low{color:var(--gold)}
+.del{background:transparent;border:0;color:#8293a7;font-size:19px;padding:5px}
+.empty{text-align:center;color:var(--muted);font-size:13px;padding:28px 10px}
+.habits{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.habit{background:#101b2a;border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px}
+.habit button{border:1px solid #2b755f;background:#173b34;color:var(--mint);border-radius:10px;padding:7px 10px;font-size:11px}
+.progress{height:7px;background:#253247;border-radius:10px;overflow:hidden;margin-top:12px}.progress i{display:block;height:100%;background:var(--mint);width:0;transition:width .2s}
+footer{text-align:center;color:#65778d;font-size:10px;margin-top:28px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1b3d36;color:#c9ffed;border:1px solid #347b66;padding:11px 16px;border-radius:12px;font-size:12px;opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1}
+@media(max-width:650px){.wrap{padding:18px 13px 90px}.formgrid{grid-template-columns:1fr 1fr}.formgrid input:first-child{grid-column:1/-1}.formgrid button{grid-column:1/-1}.stats{gap:7px}.stat{padding:12px}.stat b{font-size:22px}.date{font-size:10px}}
+@media(max-width:390px){.habits{grid-template-columns:1fr}.hero{padding:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+ <div class="brand"><div class="logo">ز</div><div><h1>زندگی من</h1><div class="sub">دستیار شخصی برای یک زندگی منظم‌تر</div></div></div>
+ <div class="date" id="today"></div>
+</header>
+<section class="hero">
+ <h2>قدم‌های کوچک، تغییرهای بزرگ 🌱</h2>
+ <p>کارهایت را ثبت کن، اولویت بده و هر روز یک قدم به برنامه‌ها و هدف‌هایت نزدیک‌تر شو.</p>
+</section>
+<section class="stats">
+ <div class="stat"><b id="total">۰</b><span>همه کارها</span></div>
+ <div class="stat"><b id="completed">۰</b><span>انجام‌شده</span></div>
+ <div class="stat"><b id="remaining">۰</b><span>باقی‌مانده</span></div>
+</section>
+<div class="section-head"><h3>کارهای من</h3><span class="hint">اطلاعات روی همین دستگاه ذخیره می‌شود</span></div>
+<section class="panel">
+ <form id="taskForm" class="formgrid">
+  <input id="taskInput" maxlength="100" placeholder="مثلاً مطالعه ۲۰ صفحه کتاب..." required>
+  <select id="category"><option>شخصی</option><option>کار</option><option>تحصیل</option><option>معنوی</option><option>سلامتی</option><option>مالی</option></select>
+  <select id="priority"><option value="متوسط">متوسط</option><option value="زیاد">زیاد</option><option value="کم">کم</option></select>
+  <button class="add" type="submit">＋ افزودن کار</button>
+ </form>
+ <div class="filters" id="filters">
+  <button class="chip active" data-filter="all">همه</button>
+  <button class="chip" data-filter="active">باقی‌مانده</button>
+  <button class="chip" data-filter="done">انجام‌شده</button>
+ </div>
+ <div id="taskList"></div>
+</section>
+<div class="section-head"><h3>عادت‌های روزانه</h3><span class="hint">برای امروز علامت بزن</span></div>
+<section class="panel">
+ <div class="habits" id="habits"></div>
+ <div class="progress"><i id="habitProgress"></i></div>
+ <div class="hint" id="habitCount" style="margin-top:8px"></div>
+</section>
+<footer>زندگی من · نسخه آزمایشی وب · داده‌ها در حافظه مرورگر این دستگاه ذخیره می‌شوند</footer>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);
+const fa=n=>new Intl.NumberFormat('fa-IR').format(n);
+const dateKey=()=>new Date().toISOString().slice(0,10);
+const today=new Date();
+$('today').innerHTML=today.toLocaleDateString('fa-IR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+let tasks=JSON.parse(localStorage.getItem('zm_tasks')||'[]');
+let filter='all';
+const habitNames=['نماز اول وقت','مطالعه','ورزش یا پیاده‌روی','قرآن و دعا'];
+let habitState=JSON.parse(localStorage.getItem('zm_habits')||'{}');
+function save(){localStorage.setItem('zm_tasks',JSON.stringify(tasks));render()}
+function render(){
+ const done=tasks.filter(t=>t.done).length;
+ $('total').textContent=fa(tasks.length);$('completed').textContent=fa(done);$('remaining').textContent=fa(tasks.length-done);
+ const visible=tasks.filter(t=>filter==='all'||(filter==='done'?t.done:!t.done));
+ $('taskList').innerHTML=visible.length?'': '<div class="empty">هنوز کاری در این فهرست نیست.<br>اولین کارت را از بالا اضافه کن.</div>';
+ visible.forEach(t=>{
+  const row=document.createElement('div');row.className='task'+(t.done?' done':'');
+  const cb=document.createElement('input');cb.type='checkbox';cb.className='check';cb.checked=t.done;cb.setAttribute('aria-label','انجام شد');cb.onchange=()=>{t.done=cb.checked;save()};
+  const main=document.createElement('div');main.className='taskmain';
+  const title=document.createElement('div');title.className='tasktitle';title.textContent=t.title;
+  const meta=document.createElement('div');meta.className='meta';meta.textContent=t.category+' · اولویت ';
+  const pri=document.createElement('span');pri.className='priority '+(t.priority==='زیاد'?'high':t.priority==='کم'?'low':'');pri.textContent=t.priority;meta.append(pri);
+  main.append(title,meta);
+  const del=document.createElement('button');del.className='del';del.textContent='×';del.title='حذف کار';del.onclick=()=>{if(confirm('این کار حذف شود؟')){tasks=tasks.filter(x=>x.id!==t.id);save();notify('کار حذف شد')}};
+  row.append(cb,main,del);$('taskList').append(row);
+ });
+}
+$('taskForm').addEventListener('submit',e=>{
+ e.preventDefault();const title=$('taskInput').value.trim();if(!title)return;
+ tasks.unshift({id:Date.now(),title,category:$('category').value,priority:$('priority').value,done:false});
+ $('taskInput').value='';save();notify('کار جدید اضافه شد');
+});
+$('filters').addEventListener('click',e=>{const b=e.target.closest('button[data-filter]');if(!b)return;filter=b.dataset.filter;document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('active',x===b));render()});
+function renderHabits(){
+ const key=dateKey();if(!habitState[key])habitState[key]=[];
+ $('habits').innerHTML='';
+ habitNames.forEach((name,i)=>{const done=habitState[key].includes(i);const item=document.createElement('div');item.className='habit';const label=document.createElement('span');label.textContent=name;const btn=document.createElement('button');btn.textContent=done?'✓ انجام شد':'+ ثبت';btn.onclick=()=>{let a=habitState[key];habitState[key]=done?a.filter(x=>x!==i):[...a,i];localStorage.setItem('zm_habits',JSON.stringify(habitState));renderHabits()};item.append(label,btn);$('habits').append(item)});
+ const count=habitState[key].length;$('habitProgress').style.width=(count/habitNames.length*100)+'%';$('habitCount').textContent=fa(count)+' از '+fa(habitNames.length)+' عادت امروز انجام شده است';
+}
+let toastTimer;function notify(msg){$('toast').textContent=msg;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),1800)}
+render();renderHabits();
+if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>
